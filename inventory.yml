@@ -1,0 +1,20 @@
+---
+all:
+  children:
+    CVAAS:
+      hosts:
+        cvaas:
+          ansible_host: www.cv-prod-us-central1-c.arista.io
+    FABRIC:
+      children:
+        SPINES:
+          hosts:
+            legacy-spine1:
+            legacy-spine2:
+        LEAFS:
+          hosts:  
+            legacy-leaf1:
+            legacy-leaf2:
+            legacy-leaf3:
+            legacy-leaf4:
+
