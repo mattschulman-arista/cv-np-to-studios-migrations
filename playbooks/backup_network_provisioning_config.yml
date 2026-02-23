@@ -43,13 +43,13 @@
   #     label: "{{ item.key }}"
 
   - name: "Writing CV device facts from {{inventory_hostname}} to file"
-    tags: [facts]
+    tags: [facts,write_devices]
     copy:
       content: "{{ hostvars['cvaas'].facts_devices.data.cvp_devices |  to_nice_yaml( width=50, explicit_start=True, explicit_end=True) }}"
       dest: "{{ cv_facts_dir }}/cvaas_devices.yaml"
     delegate_to: localhost
   - name: "Writing CV container facts from {{inventory_hostname}} to file"
-    tags: [facts]
+    tags: [facts,write_containers]
     copy:
       content: "{{ hostvars['cvaas'].facts_devices.data.cvp_containers |  to_nice_yaml( width=50, explicit_start=True, explicit_end=True) }}"
       dest: "{{ cv_facts_dir }}/cvaas_containers.yaml"
@@ -61,7 +61,7 @@
   #     dest: "{{ cv_facts_dir }}/cvaas_configlets.yaml"
   #   delegate_to: localhost
   - name: "Writing CV Configlets to Configlets Dir"
-    tags: [facts]
+    tags: [facts,write_configlets]
     copy:
       content: "{{ item.value}} "
       dest: "{{ configlets_dir }}/{{ item.key }}"

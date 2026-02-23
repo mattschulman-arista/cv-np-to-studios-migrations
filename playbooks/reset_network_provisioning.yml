@@ -1,0 +1,13 @@
+---
+- name: "CVaaS - Reset Network Provisioning"
+  hosts: cvaas
+  connection: local
+  gather_facts: no
+  vars:
+    devices: "{{ lookup('file', '../cv_facts/cvaas_devices.yaml') | from_yaml }}"
+  tasks:
+    - name: Reset devices to undefined container and remove configlets
+      arista.cvp.cv_device_v3:
+        devices: "{{ devices }}"
+        state: provisioning_reset
+        search_key: fqdn
