@@ -1,0 +1,12 @@
+playbooks/cvaas-token.tok
+playbooks/cvp-token.tok
+cvaas-service.tok
+onprem.tok
+inventory*.yml
+cvp_to_cvaas_Lab_inventory.yml
+.history/
+.DS_Store
+cv_facts/
+option2_cvaas_migration.yaml
+configure_static_config_studio_cv_workflow.yml
+cv_static_config_manifest.yml

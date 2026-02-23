@@ -1,0 +1,15 @@
+- name: Use cv_workflow to configure Static Configuration Studio
+  hosts: FABRIC
+  connection: local
+  gather_facts: no
+  tasks:
+    - name: Deploy to CVAAS
+      ansible.builtin.import_role:
+        name: arista.avd.cv_deploy
+      vars:
+        cv_server: www.cv-prod-us-central1-c.arista.io
+        cv_token: "{{lookup('file', '../cvaas-service.tok')}}"
+        cv_skip_missing_devices: true
+        cv_devices: []
+        cv_submit_workspace: false
+        cv_workspace_name: "Static Configuration Studio via Ansible"

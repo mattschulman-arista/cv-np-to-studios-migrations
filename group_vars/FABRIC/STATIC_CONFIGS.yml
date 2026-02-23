@@ -1,0 +1,98 @@
+---
+cv_static_config_manifest:
+  configlets:
+    - name: INFRA-LEGACY
+      file: ./cv_facts/configlets/INFRA-LEGACY
+    - name: legacy-MLAG_Left
+      file: ./cv_facts/configlets/legacy-MLAG_Left
+    - name: legacy-MLAG_Right
+      file: ./cv_facts/configlets/legacy-MLAG_Right
+    - name: legacy-leaf1-base
+      file: ./cv_facts/configlets/legacy-leaf1-base
+    - name: legacy-leaf1-overlay
+      file: ./cv_facts/configlets/legacy-leaf1-overlay
+    - name: legacy-leaf1-underlay
+      file: ./cv_facts/configlets/legacy-leaf1-underlay
+    - name: legacy-leaf2-base
+      file: ./cv_facts/configlets/legacy-leaf2-base
+    - name: legacy-leaf2-overlay
+      file: ./cv_facts/configlets/legacy-leaf2-overlay
+    - name: legacy-leaf2-underlay
+      file: ./cv_facts/configlets/legacy-leaf2-underlay
+    - name: legacy-leaf3-base
+      file: ./cv_facts/configlets/legacy-leaf3-base
+    - name: legacy-leaf3-overlay
+      file: ./cv_facts/configlets/legacy-leaf3-overlay
+    - name: legacy-leaf3-underlay
+      file: ./cv_facts/configlets/legacy-leaf3-underlay
+    - name: legacy-leaf4-base
+      file: ./cv_facts/configlets/legacy-leaf4-base
+    - name: legacy-leaf4-overlay
+      file: ./cv_facts/configlets/legacy-leaf4-overlay
+    - name: legacy-leaf4-underlay
+      file: ./cv_facts/configlets/legacy-leaf4-underlay
+    - name: legacy-spine1-base
+      file: ./cv_facts/configlets/legacy-spine1-base
+    - name: legacy-spine1-overlay
+      file: ./cv_facts/configlets/legacy-spine1-overlay
+    - name: legacy-spine1-underlay
+      file: ./cv_facts/configlets/legacy-spine1-underlay
+    - name: legacy-spine2-base
+      file: ./cv_facts/configlets/legacy-spine2-base
+    - name: legacy-spine2-overlay
+      file: ./cv_facts/configlets/legacy-spine2-overlay
+    - name: legacy-spine2-underlay
+      file: ./cv_facts/configlets/legacy-spine2-underlay
+
+  containers:
+    - name: Legacy-DC
+      tag_query: "device:legacy-spine1,legacy-spine2,legacy-leaf1,legacy-leaf2,legacy-leaf3,legacy-leaf4"
+      configlets:
+        - name: INFRA-LEGACY
+      sub_containers:
+        - name: Legacy-Leafs
+          tag_query: "device:legacy-leaf1,legacy-leaf2,legacy-leaf3,legacy-leaf4"
+          sub_containers:
+            - name: legacy-leaf1
+              tag_query: "device:legacy-leaf1"
+              configlets:
+                - name: legacy-MLAG_Left
+                - name: legacy-leaf1-base
+                - name: legacy-leaf1-overlay
+                - name: legacy-leaf1-underlay
+            - name: legacy-leaf2
+              tag_query: "device:legacy-leaf2"
+              configlets:
+                - name: legacy-MLAG_Right
+                - name: legacy-leaf2-base
+                - name: legacy-leaf2-overlay
+                - name: legacy-leaf2-underlay
+            - name: legacy-leaf3
+              tag_query: "device:legacy-leaf3"
+              configlets:
+                - name: legacy-MLAG_Left
+                - name: legacy-leaf3-base
+                - name: legacy-leaf3-overlay
+                - name: legacy-leaf3-underlay
+            - name: legacy-leaf4
+              tag_query: "device:legacy-leaf4"
+              configlets:
+                - name: legacy-MLAG_Right
+                - name: legacy-leaf4-base
+                - name: legacy-leaf4-overlay
+                - name: legacy-leaf4-underlay
+        - name: Legacy-Spines
+          tag_query: "device:legacy-spine1,legacy-spine2"
+          sub_containers:
+            - name: legacy-spine1
+              tag_query: "device:legacy-spine1"
+              configlets:
+                - name: legacy-spine1-base
+                - name: legacy-spine1-overlay
+                - name: legacy-spine1-underlay
+            - name: legacy-spine2
+              tag_query: "device:legacy-spine2"
+              configlets:
+                - name: legacy-spine2-base
+                - name: legacy-spine2-overlay
+                - name: legacy-spine2-underlay

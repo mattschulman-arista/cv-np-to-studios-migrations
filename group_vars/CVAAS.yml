@@ -1,0 +1,11 @@
+---
+ansible_user: cvaas
+ansible_password: "{{lookup('file', '../cvaas-service.tok')}}"
+ansible_connection: httpapi
+ansible_network_os: eos
+ansible_httpapi_use_ssl: True
+ansible_httpapi_validate_certs: False
+ansible_httpapi_port: 443
+ansible_httpapi_host: '{{ ansible_host }}'
+ansible_become: true
+ansible_become_method: enable
